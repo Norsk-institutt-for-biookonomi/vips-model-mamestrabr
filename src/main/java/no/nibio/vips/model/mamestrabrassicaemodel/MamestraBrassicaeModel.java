@@ -360,9 +360,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
                 THRESHOLD_TMDD_EGG_HATCH +
                 THRESHOLD_TMDD_LARVAE_1 +
                 THRESHOLD_TMDD_LARVAE_2 +
-                THRESHOLD_TMDD_LARVAE_3 +
-                THRESHOLD_TMDD_LARVAE_4 + 
-                THRESHOLD_TMDD_LARVAE_5
+                THRESHOLD_TMDD_LARVAE_3 
                 )
         {
             return Result.WARNING_STATUS_HIGH_RISK;
