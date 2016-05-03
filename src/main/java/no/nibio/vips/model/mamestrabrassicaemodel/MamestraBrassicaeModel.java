@@ -143,7 +143,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
     public String getLicense() {
         return "Copyright (c) 2016 NIBIO <http://www.nibio.no/>. \n" +
             "\n" +
-            "This file is part of LygusRugulipennisModel. \n" + 
+            "This file is part of MamestraBrassicaeModel. \n" + 
             "MamestraBrassicaeModel is free software: you can redistribute it and/or modify \n" + 
             "it under the terms of the NIBIO Open Source License as published by \n" + 
             "NIBIO, either version 1 of the License, or (at your option) any \n" +
@@ -343,13 +343,16 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
     }
 
     private Integer getWarningStatus(Double accumulatedDayDegrees) {
-        if(accumulatedDayDegrees < THRESHOLD_TMDD_PUPAE)
+        if(accumulatedDayDegrees < THRESHOLD_TMDD_PUPAE
+                + THRESHOLD_TMDD_EGG_DEPOSIT)
         {
             return Result.WARNING_STATUS_NO_RISK;
         }
         else if(accumulatedDayDegrees < 
                 THRESHOLD_TMDD_PUPAE 
                 + THRESHOLD_TMDD_EGG_DEPOSIT
+                + THRESHOLD_TMDD_EGG_HATCH
+                + THRESHOLD_TMDD_LARVAE_1
                 )
         {
             return Result.WARNING_STATUS_MINOR_RISK;
@@ -365,6 +368,19 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
         {
             return Result.WARNING_STATUS_HIGH_RISK;
         }
+        else if(accumulatedDayDegrees < 
+                THRESHOLD_TMDD_PUPAE + 
+                THRESHOLD_TMDD_EGG_DEPOSIT + 
+                THRESHOLD_TMDD_EGG_HATCH +
+                THRESHOLD_TMDD_LARVAE_1 +
+                THRESHOLD_TMDD_LARVAE_2 +
+                THRESHOLD_TMDD_LARVAE_3 +
+                THRESHOLD_TMDD_LARVAE_4 +
+                THRESHOLD_TMDD_LARVAE_5
+                )
+        {
+            return Result.WARNING_STATUS_MINOR_RISK;
+        }
         else
         {
             return Result.WARNING_STATUS_NO_WARNING;
@@ -373,7 +389,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
 
     private void setAllThresholds(Result result) {
         result.setValue(this.getModelId().toString(), "SWARMING_START", String.valueOf(THRESHOLD_TMDD_PUPAE));
-        result.setValue(this.getModelId().toString(), "EGG_HATCH_START", String.valueOf(THRESHOLD_TMDD_PUPAE + THRESHOLD_TMDD_EGG_DEPOSIT));
+        result.setValue(this.getModelId().toString(), "EGG_DEPOSIT_START", String.valueOf(THRESHOLD_TMDD_PUPAE + THRESHOLD_TMDD_EGG_DEPOSIT));
         result.setValue(this.getModelId().toString(), "TREATMENT_OPTIMUM", String.valueOf(
                 THRESHOLD_TMDD_PUPAE 
                 + THRESHOLD_TMDD_EGG_DEPOSIT
