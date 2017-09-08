@@ -106,7 +106,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
             
             
             Result result = new ResultImpl();
-            result.setResultValidTime(currentDate);
+            result.setValidTimeStart(currentDate);
             result.setWarningStatus(this.getWarningStatus(accumulatedDayDegrees));
             this.setAllThresholds(result);
             
