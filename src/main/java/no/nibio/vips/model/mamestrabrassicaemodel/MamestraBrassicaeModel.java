@@ -94,7 +94,10 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
         DecimalFormat dFormat = new DecimalFormat("###.##");
         List<Result> retVal = new ArrayList<>();
         Calendar cal = Calendar.getInstance(timeZone);
-        while(currentDate.before(endDate))
+        while(currentDate.before(endDate)
+                // Stopping if we're running out of soil temp too early
+                && !(accumulatedDayDegrees < THRESHOLD_TMDD_PUPAE && this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D) == null)
+                )
         {
             Double baseTemp = this.findT0(accumulatedDayDegrees);
             Double todayTemp = accumulatedDayDegrees < THRESHOLD_TMDD_PUPAE ? 
@@ -113,7 +116,10 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
             result.setValue(this.getModelId().toString(),"TMDD", dFormat.format(accumulatedDayDegrees));
             
             // Set input data
-            result.setValue(CommonNamespaces.NS_WEATHER, "TJM10D", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D)).getValue()));
+            if(this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D) != null)
+            {
+                result.setValue(CommonNamespaces.NS_WEATHER, "TJM10D", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D)).getValue()));
+            }
             result.setValue(CommonNamespaces.NS_WEATHER, "TMD", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TMD)).getValue()));
             
             retVal.add(result);
@@ -318,7 +324,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
                     this.dataMatrix.getFirstDateWithParameterValue(DataMatrix.TJM10D) + ", last day with air temp = " + 
                     this.dataMatrix.getLastDateWithParameterValue(DataMatrix.TMD));
         }
-        
+        //System.out.println(this.dataMatrix.toCSV());
     }
 
     private Double findT0(Double accumulatedDayDegrees)
