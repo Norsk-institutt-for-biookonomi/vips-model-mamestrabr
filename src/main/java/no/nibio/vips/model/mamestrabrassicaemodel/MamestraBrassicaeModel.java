@@ -116,7 +116,10 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
             result.setValue(this.getModelId().toString(),"TMDD", dFormat.format(accumulatedDayDegrees));
             
             // Set input data
-            result.setValue(CommonNamespaces.NS_WEATHER, "TJM10D", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D)).getValue()));
+            if(this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D) != null)
+            {
+                result.setValue(CommonNamespaces.NS_WEATHER, "TJM10D", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TJM10D)).getValue()));
+            }
             result.setValue(CommonNamespaces.NS_WEATHER, "TMD", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TMD)).getValue()));
             
             retVal.add(result);
