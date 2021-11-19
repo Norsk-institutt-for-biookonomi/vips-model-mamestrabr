@@ -250,7 +250,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
         // Importing weather data, creating collections
         // Can accept both hourly and daily data
         WeatherUtil wUtil = new WeatherUtil();
-        List<WeatherObservation> observations = mapper.convertValue(config.getConfigParameter("observations"), new TypeReference<List<WeatherObservation>>(){});
+        List<WeatherObservation> observations = this.modelUtil.extractWeatherObservationList(config.getConfigParameter("observations"));
         for(WeatherObservation o:observations)
         {
             switch(o.getElementMeasurementTypeId())
