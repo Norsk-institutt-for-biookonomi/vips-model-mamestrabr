@@ -316,6 +316,11 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
             }
         }
         
+        if(this.dataMatrix.getFirstDateWithParameterValue(DataMatrix.TJM10D) == null)
+        {
+            throw new ConfigValidationException("ERROR: No data for soil temperature at -10cm");
+        }
+        
         if(this.dataMatrix.getFirstDateWithParameterValue(DataMatrix.TJM10D)
                 .after(this.dataMatrix.getLastDateWithParameterValue(DataMatrix.TMD))
                 )
