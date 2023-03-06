@@ -122,35 +122,6 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
             }
             result.setValue(CommonNamespaces.NS_WEATHER, "TMD", dFormat.format(((WeatherObservation)this.dataMatrix.getParamValueForDate(currentDate, DataMatrix.TMD)).getValue()));
             
-            // Adding thresholds for model display
-            result.setValue(this.getModelId().toString(), "THRESHOLD_TMDD_PUPAE", String.valueOf(THRESHOLD_TMDD_PUPAE));
-            result.setValue(this.getModelId().toString(), "THRESHOLD_TMDD_EGG_DEPOSIT", String.valueOf(THRESHOLD_TMDD_PUPAE + THRESHOLD_TMDD_EGG_DEPOSIT));
-            result.setValue(this.getModelId().toString(), "THRESHOLD_TMDD_LARVAE_1", String.valueOf(
-                    THRESHOLD_TMDD_PUPAE 
-                    + THRESHOLD_TMDD_EGG_DEPOSIT 
-                    + THRESHOLD_TMDD_EGG_HATCH 
-                    + THRESHOLD_TMDD_LARVAE_1
-            ));
-            result.setValue(this.getModelId().toString(), "THRESHOLD_TMDD_LARVAE_3", String.valueOf(
-                    THRESHOLD_TMDD_PUPAE 
-                    + THRESHOLD_TMDD_EGG_DEPOSIT 
-                    + THRESHOLD_TMDD_EGG_HATCH 
-                    + THRESHOLD_TMDD_LARVAE_1 
-                    + THRESHOLD_TMDD_LARVAE_2 
-                    + THRESHOLD_TMDD_LARVAE_3
-            ));
-            result.setValue(this.getModelId().toString(), "THRESHOLD_TMDD_LARVAE_5", String.valueOf(
-                    THRESHOLD_TMDD_PUPAE 
-                    + THRESHOLD_TMDD_EGG_DEPOSIT 
-                    + THRESHOLD_TMDD_EGG_HATCH 
-                    + THRESHOLD_TMDD_LARVAE_1 
-                    + THRESHOLD_TMDD_LARVAE_2 
-                    + THRESHOLD_TMDD_LARVAE_3 
-                    + THRESHOLD_TMDD_LARVAE_4 
-                    + THRESHOLD_TMDD_LARVAE_5)
-            );
-            
-            
             retVal.add(result);
             cal.setTime(currentDate);
             cal.add(Calendar.DATE, 1);
