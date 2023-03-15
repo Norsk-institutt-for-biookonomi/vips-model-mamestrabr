@@ -214,6 +214,7 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
                 "\t},\n" +
                 "\t\"modelId\":\"" + MODEL_ID.toString() + "\",\n" +
                 "\t\"configParameters\":{\n" +
+                "\t\t\"timeZone\":\"Europe/Oslo\", \n" +
                 "\t\t\"observations\":[\n" +
                 "\t\t{\n" +
                 "\t\t\t\t\"timeMeasured\": \"2015-01-01T00:00:00+02:00\",\n" +
