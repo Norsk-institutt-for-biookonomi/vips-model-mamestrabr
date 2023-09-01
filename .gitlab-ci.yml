@@ -17,6 +17,7 @@ cache:
 build:
   stage: build
   script:
+    - env
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS package
   tags:
     - vips-java
