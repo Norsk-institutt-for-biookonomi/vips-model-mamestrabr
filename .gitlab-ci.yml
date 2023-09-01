@@ -28,6 +28,15 @@ test:
   tags:
     - vips-java
 
+test_after_vips_common_changes:
+  stage: test
+  script:
+    - echo $VERSION
+    - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS test
+  only:
+    variables:
+      - $CI_PIPELINE_SOURCE == "pipeline"
+
 deploy-snapshot:
   stage: deploy
   script:
