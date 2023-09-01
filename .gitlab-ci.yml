@@ -37,6 +37,8 @@ test_after_vips_common_changes:
   script:
     - echo $VERSION
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS test
+  tags:
+    - vips-java
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"'
 
