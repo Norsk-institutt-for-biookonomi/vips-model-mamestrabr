@@ -57,7 +57,7 @@ deploy-release:
     - git reset --hard origin/$RELEASE_BRANCH
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS validate -DremoveSnapshot
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS deploy -DskipTests
-    - export RELEASE_VERSION=$(mvn --batch-mode --no-transfer-progress --non-recursive help:evaluate -Dexpression=project.version | grep -v "\[.*")
+    - export RELEASE_VERSION=$(./mvnw --batch-mode --no-transfer-progress --non-recursive help:evaluate -Dexpression=project.version | grep -v "\[.*")
     - export RELEASE_TAG="v${RELEASE_VERSION}"
     - git add pom.xml
     - git commit -m "[ci skip] Set release version ${RELEASE_VERSION}"
