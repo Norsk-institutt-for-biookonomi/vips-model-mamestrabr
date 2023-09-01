@@ -20,6 +20,8 @@ build:
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS package
   tags:
     - vips-java
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
 
 test:
   stage: test
@@ -27,15 +29,16 @@ test:
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS test
   tags:
     - vips-java
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
 
 test_after_vips_common_changes:
   stage: test
   script:
     - echo $VERSION
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS test
-  only:
-    variables:
-      - $CI_PIPELINE_SOURCE == "pipeline"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
 
 deploy-snapshot:
   stage: deploy
@@ -44,7 +47,7 @@ deploy-snapshot:
   tags:
     - vips-java
   rules:
-    - if: '$CI_COMMIT_REF_NAME == $MAIN_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_REF_NAME == $MAIN_BRANCH'
 
 deploy-release:
   stage: deploy
@@ -83,4 +86,4 @@ deploy-release:
   tags:
     - vips-java
   rules:
-    - if: '$CI_COMMIT_REF_NAME == $RELEASE_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_REF_NAME == $RELEASE_BRANCH'
