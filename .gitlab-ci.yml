@@ -33,11 +33,14 @@ test:
   rules:
     - if: '$CI_PIPELINE_SOURCE != "trigger"'
 
+# This job is triggered by the VIPSCommon pipeline, and builds the model with the given version of VIPSCommon
 test_after_vips_common_changes:
   stage: test
   script:
     - echo $VERSION
-    - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS test
+    - ./mvnw versions:use-dep-version -Dincludes=no.nibio.vips:VIPSCommon -DdepVersion=$VERSION -DforceVersion=true
+    - echo 'Build model with no.nibio.vips:VIPSCommon:$VERSION'
+    - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS package
   tags:
     - vips-java
   rules:
