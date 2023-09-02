@@ -22,7 +22,7 @@ build:
   tags:
     - vips-java
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE != "trigger"'
 
 test:
   stage: test
@@ -31,7 +31,7 @@ test:
   tags:
     - vips-java
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE != "trigger"'
 
 test_after_vips_common_changes:
   stage: test
@@ -41,7 +41,7 @@ test_after_vips_common_changes:
   tags:
     - vips-java
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
+    - if: '$CI_PIPELINE_SOURCE == "trigger"'
 
 deploy-snapshot:
   stage: deploy
@@ -50,7 +50,7 @@ deploy-snapshot:
   tags:
     - vips-java
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_REF_NAME == $MAIN_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE != "trigger" && $CI_COMMIT_REF_NAME == $MAIN_BRANCH'
 
 deploy-release:
   stage: deploy
@@ -89,4 +89,4 @@ deploy-release:
   tags:
     - vips-java
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_REF_NAME == $RELEASE_BRANCH'
+    - if: '$CI_PIPELINE_SOURCE != "trigger" && $CI_COMMIT_REF_NAME == $RELEASE_BRANCH'
