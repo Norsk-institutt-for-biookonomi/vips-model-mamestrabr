@@ -50,7 +50,7 @@ deploy-snapshot:
   stage: deploy
   script:
     - export VERSION=$(./mvnw --batch-mode --no-transfer-progress --non-recursive help:evaluate -Dexpression=project.version | grep -v "\[.*")
-    - if ! [[ $VERSION =~ .*SNAPSHOT ]]; then exit 0; fi
+    - if ! [[ $VERSION =~ .*SNAPSHOT ]]; then exit 1; fi
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS deploy -DskipTests
   tags:
     - vips-java
