@@ -49,6 +49,8 @@ test_after_vips_common_changes:
 deploy-snapshot:
   stage: deploy
   script:
+    - export VERSION=$(./mvnw --batch-mode --no-transfer-progress --non-recursive help:evaluate -Dexpression=project.version | grep -v "\[.*")
+    - if ! [[ $VERSION =~ .*SNAPSHOT ]]; then exit 0; fi
     - ./mvnw $MAVEN_CLI_OPTS $MAVEN_OPTS deploy -DskipTests
   tags:
     - vips-java
