@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 NIBIO <http://www.nibio.no/>. 
+ * Copyright (c) 2026 NIBIO <http://www.nibio.no/>. 
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,8 +18,6 @@
 
 package no.nibio.vips.model.mamestrabrassicaemodel;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ import no.nibio.vips.util.WeatherUtil;
 
 /**
  * Forecasting model for Mamestra brassicae (NO: Kålfly)
- * @copyright 2016 <a href="http://www.nibio.no/">NIBIO</a>
+ * @copyright 2026 <a href="http://www.nibio.no/">NIBIO</a>
  * @author Tor-Einar Skog <tor-einar.skog@nibio.no>
  */
 public class MamestraBrassicaeModel extends I18nImpl implements Model{
@@ -241,7 +239,6 @@ public class MamestraBrassicaeModel extends I18nImpl implements Model{
         // Init data matrix
         this.dataMatrix = new DataMatrix();
         
-        ObjectMapper mapper = new ObjectMapper();
         
         // Setting timezone
         this.timeZone = TimeZone.getTimeZone((String) config.getConfigParameter("timeZone"));
